@@ -1,3 +1,3 @@
-import { TextFiedlStyled } from './TextField.style';
+import { TextFieldStyled } from './TextField.style';
 
-export default TextFiedlStyled;
+export default TextFieldStyled;

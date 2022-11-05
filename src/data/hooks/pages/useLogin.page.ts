@@ -9,7 +9,7 @@ export default function useLogin() {
     });
 
     function onSubmit(data: { login: LoginFormDataInterface }) {
-        console.log(data);
+        console.log(data.login);
     }
     return {
         formMethods,

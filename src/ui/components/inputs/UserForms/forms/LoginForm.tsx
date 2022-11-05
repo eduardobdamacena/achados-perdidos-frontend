@@ -1,14 +1,15 @@
+import { LoginFormDataInterface } from 'data/@types/FormInterface';
 import { useFormContext } from 'react-hook-form';
 import TextField from '../../TextField/TextField';
-import { LoginData } from '../UserForm.style';
+import { FormContainer } from '../UserForm.style';
 
 export const LoginForm = () => {
     const {
         register,
         formState: { errors },
-    } = useFormContext();
+    } = useFormContext<{ login: LoginFormDataInterface }>();
     return (
-        <LoginData>
+        <FormContainer>
             <TextField
                 {...register('login.email')}
                 label={'E-mail'}
@@ -24,6 +25,6 @@ export const LoginForm = () => {
                 error={errors?.login?.password !== undefined}
                 helperText={errors?.login?.password?.message}
             />
-        </LoginData>
+        </FormContainer>
     );
 };
