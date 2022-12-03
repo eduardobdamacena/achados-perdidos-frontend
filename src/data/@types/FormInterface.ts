@@ -1,12 +1,9 @@
-import { LocalInterface } from './LocalInterface';
-import { UserInterface } from './UserInterface';
+import { UserPlaceInterface } from './UserPlaceInterface';
 
 export interface LoginFormDataInterface {
     email: string;
     password: string;
 }
 
-export interface CadastroLocalFormDataInterface {
-    local: LocalInterface;
-    usuario: UserInterface;
-}
+export interface RegisterPlaceUserFormDataInterface
+    extends UserPlaceInterface {}

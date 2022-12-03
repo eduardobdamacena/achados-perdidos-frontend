@@ -1,5 +1,4 @@
-import { Container } from '@mui/material';
-import { LoginContainer } from '@styles/pages/login.style';
+import { Container, Typography } from '@mui/material';
 import useLogin from 'data/hooks/pages/useLogin.page';
 import { NextPage } from 'next';
 import Head from 'next/head';
@@ -9,20 +8,25 @@ import RoudedButton from 'ui/components/inputs/RoudedButton/RoudedButton';
 import { LoginForm } from 'ui/components/inputs/UserForms/UserForm';
 import { FormProvider } from 'react-hook-form';
 import {
-    ContainerBorder,
     FormContainer,
     PageFormContainerBorder,
 } from 'ui/components/inputs/UserForms/UserForm.style';
 
 const Login: NextPage = () => {
-    const { formMethods, onSubmit } = useLogin();
+    const {
+        externalServicesState,
+        isWaitingReponse,
+        errorLogin,
+        formMethods,
+        onSubmit,
+    } = useLogin();
     return (
         <Container>
             <Head>
                 <title>Login</title>
             </Head>
             <PageTitle
-                title="Realizar o Login"
+                title="Realizar o Login "
                 subtitle="Realize o login para gerenciar os objetos cadastrados"
             />
             <FormProvider {...formMethods}>
@@ -35,9 +39,23 @@ const Login: NextPage = () => {
                             variant="contained"
                             sx={{ justifySelf: 'center', width: '120px' }}
                             type={'submit'}
+                            disabled={
+                                isWaitingReponse ||
+                                externalServicesState?.externalServices
+                                    ?.length === 0
+                            }
+                            loading={isWaitingReponse}
                         >
                             Entrar
                         </RoudedButton>
+                        {errorLogin && (
+                            <Typography
+                                sx={{ textAlign: 'center' }}
+                                color={'error'}
+                            >
+                                {errorLogin}
+                            </Typography>
+                        )}
                     </FormContainer>
                 </form>
             </FormProvider>

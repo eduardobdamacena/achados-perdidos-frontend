@@ -3,11 +3,14 @@ import FileField from '../../FileField/FileField';
 import { FormContainer } from '../UserForm.style';
 
 export const PicturePlaceForm = () => {
-    const { control } = useFormContext();
+    const {
+        control,
+        formState: { errors },
+    } = useFormContext<{ imagem: string }>();
     return (
         <FormContainer>
             <Controller
-                name={'local.imagem'}
+                name={'imagem'}
                 defaultValue={''}
                 control={control}
                 render={({ field }) => (

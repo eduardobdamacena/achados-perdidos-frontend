@@ -19,24 +19,22 @@ export const FormSchemaService = {
         return yup
             .object()
             .shape({
-                local: yup.object().shape({
-                    nome: yup
-                        .string()
-                        .min(3, 'Nome muito curto')
-                        .max(255, 'Nome muito grande')
-                        .required('Informe o nome'),
-                    endereco: yup
-                        .string()
-                        .min(3, 'Endereço muito curto')
-                        .max(255, 'Endereço muito grande')
-                        .required('Informe o endereço'),
-                    contato: yup
-                        .string()
-                        .min(3, 'Contato muito curto')
-                        .max(255, 'Contato muito grande')
-                        .required('Informe o contato'),
-                    descricao: yup.string().max(255, 'Descrição muito grande'),
-                }),
+                nome: yup
+                    .string()
+                    .min(3, 'Nome muito curto')
+                    .max(255, 'Nome muito grande')
+                    .required('Informe o nome'),
+                endereco: yup
+                    .string()
+                    .min(3, 'Endereço muito curto')
+                    .max(255, 'Endereço muito grande')
+                    .required('Informe o endereço'),
+                contato: yup
+                    .string()
+                    .min(3, 'Contato muito curto')
+                    .max(255, 'Contato muito grande')
+                    .required('Informe o contato'),
+                descricao: yup.string().max(255, 'Descrição muito grande'),
             })
             .defined();
     },

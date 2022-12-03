@@ -1,4 +1,4 @@
-import { CadastroLocalFormDataInterface } from 'data/@types/FormInterface';
+import { RegisterPlaceUserFormDataInterface } from 'data/@types/FormInterface';
 import { useFormContext } from 'react-hook-form';
 import TextField from '../../TextField/TextField';
 import { FormContainer } from '../UserForm.style';
@@ -7,7 +7,7 @@ export const NewUserForm = () => {
     const {
         register,
         formState: { errors },
-    } = useFormContext<CadastroLocalFormDataInterface>();
+    } = useFormContext<RegisterPlaceUserFormDataInterface>();
     return (
         <FormContainer>
             <TextField

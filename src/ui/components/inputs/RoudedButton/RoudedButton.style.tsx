@@ -1,6 +1,7 @@
-import { Button, styled } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { styled } from '@mui/material';
 
-const RoudedButtonStyled = styled(Button)`
+const RoudedButtonStyled = styled(LoadingButton)`
     border-radius: 5px;
 `;
 

@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import useCadastro from 'data/hooks/pages/useCadastroLocal.page';
+import useCadastro from 'data/hooks/pages/useRegisterUserPlace.page';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { FormProvider } from 'react-hook-form';
@@ -14,8 +14,8 @@ import {
 } from 'ui/components/inputs/UserForms/UserForm.style';
 import { Typography } from '@mui/material';
 
-const CadastroLocal: NextPage = () => {
-    const { formMethods, onSubmit } = useCadastro();
+const RegisterUserPlace: NextPage = () => {
+    const { formMethods, onSubmit, isWaitingReponse } = useCadastro();
     return (
         <Container sx={{ marginBottom: '40px' }}>
             <Head>Cadastro</Head>
@@ -42,7 +42,9 @@ const CadastroLocal: NextPage = () => {
                         <RoudedButton
                             type="submit"
                             variant="contained"
-                            sx={{ justifySelf: 'center', width: '120px' }}
+                            sx={{ justifySelf: 'center' }}
+                            disabled={isWaitingReponse}
+                            loading={isWaitingReponse}
                         >
                             Cadastrar
                         </RoudedButton>
@@ -53,4 +55,4 @@ const CadastroLocal: NextPage = () => {
     );
 };
 
-export default CadastroLocal;
+export default RegisterUserPlace;
