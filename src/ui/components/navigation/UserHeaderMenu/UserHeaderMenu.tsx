@@ -40,10 +40,10 @@ const UserHeaderMenu: React.FC<UserHeaderMenuProps> = (props) => {
                     horizontal: 'right',
                 }}
             >
-                <MenuItem disableRipple>
+                <MenuItem id="alterar-dados" disableRipple>
                     <Link href={''}>Alterar Dados</Link>
                 </MenuItem>
-                <MenuItem disableRipple onClick={props.onLogout}>
+                <MenuItem id="logout" disableRipple onClick={props.onLogout}>
                     Sair
                 </MenuItem>
             </StyledMenu>

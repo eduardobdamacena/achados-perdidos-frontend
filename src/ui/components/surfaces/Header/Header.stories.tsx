@@ -21,7 +21,7 @@ Default.args = {
         links: [],
         usuario: {
             id: 1,
-            nome: 'João',
+            nome: 'João Silva',
             email: 'joao@mail.com',
         },
     },
