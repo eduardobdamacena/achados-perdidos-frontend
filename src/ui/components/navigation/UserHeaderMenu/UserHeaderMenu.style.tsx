@@ -4,6 +4,9 @@ import Menu from '@mui/material/Menu';
 export const ButtonMenuStyled = styled(Button)`
     &.MuiButtonBase-root {
         padding: 0px ${({ theme }) => theme.spacing()};
+        ${({ theme }) => theme.breakpoints.down('md')} {
+            font-size: 11px;
+        }
     }
 
     .MuiButton-endIcon svg {

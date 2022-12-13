@@ -11,11 +11,9 @@ export const AppBarStyled = styled(AppBar)`
 `;
 
 export const HeaderLogo = styled('img')`
-    height: 25px;
-    margin: 15px;
-
+    height: 40px;
+    margin: ${({ theme }) => theme.spacing()};
     ${({ theme }) => theme.breakpoints.up('md')} {
         height: 50px;
-        margin: 30px;
     }
 `;

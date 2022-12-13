@@ -31,6 +31,14 @@ const UserHeaderMenu: React.FC<UserHeaderMenuProps> = (props) => {
                 onClose={props.onMenuClose}
                 onClick={props.onMenuClick}
                 anchorEl={buttonRef.current}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
             >
                 <MenuItem disableRipple>
                     <Link href={''}>Alterar Dados</Link>

@@ -5,7 +5,7 @@ export const ContainerPagetTitle = styled('div')`
 `;
 
 export const PageTitleStyled = styled('h1')`
-    font-size: x-large;
+    font-size: large;
     color: #293845;
 `;
 
