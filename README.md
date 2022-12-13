@@ -32,3 +32,11 @@ Obs.: Deixar '/' no final do endereço da API, para não quebrar os links das ro
 NEXT_PUBLIC_API="http://localhost:8000/"
 ```
 
+### Executar o Storybook
+
+Para abrir a documentação dos componentes com Storybook, execute o script:
+
+```bash
+start-storybook -p 6006 -s ./public
+```
+
