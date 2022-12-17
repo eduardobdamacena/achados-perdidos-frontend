@@ -8,9 +8,11 @@ export const FormSchemaService = {
                 .shape({
                     email: yup
                         .string()
-                        .required('Informe o E-mail')
-                        .email('E-mail inválido'),
-                    password: yup.string().min(5, 'Senha muito curta'),
+                        .min(3, 'Email muito curto')
+                        .max(255, 'Email muito grande')
+                        .email('E-mail inválido')
+                        .required('Informe o E-mail'),
+                    password: yup.string().min(3, 'Senha muito curta'),
                 })
                 .defined(),
         });
