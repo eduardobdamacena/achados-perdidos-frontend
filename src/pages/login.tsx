@@ -4,12 +4,12 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
-import RoudedButton from 'ui/components/inputs/RoudedButton/RoudedButton';
 import { LoginForm } from 'ui/components/inputs/UserForms/UserForm';
 import { FormProvider } from 'react-hook-form';
 import {
+    ButtonSubmit,
     FormContainer,
-    PageFormContainerBorder,
+    FormDataBorder,
 } from 'ui/components/inputs/UserForms/UserForm.style';
 
 const Login: NextPage = () => {
@@ -26,18 +26,17 @@ const Login: NextPage = () => {
                 <title>Login</title>
             </Head>
             <PageTitle
-                title="Realizar o Login "
+                title="Realizar o login"
                 subtitle="Realize o login para gerenciar os objetos cadastrados"
             />
             <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(onSubmit)}>
                     <FormContainer>
-                        <PageFormContainerBorder>
+                        <FormDataBorder>
                             <LoginForm />
-                        </PageFormContainerBorder>
-                        <RoudedButton
+                        </FormDataBorder>
+                        <ButtonSubmit
                             variant="contained"
-                            sx={{ justifySelf: 'center', width: '120px' }}
                             type={'submit'}
                             disabled={
                                 isWaitingReponse ||
@@ -47,7 +46,7 @@ const Login: NextPage = () => {
                             loading={isWaitingReponse}
                         >
                             Entrar
-                        </RoudedButton>
+                        </ButtonSubmit>
                         {errorLogin && (
                             <Typography
                                 sx={{ textAlign: 'center' }}

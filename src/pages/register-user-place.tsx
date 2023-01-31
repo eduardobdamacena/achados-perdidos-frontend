@@ -4,50 +4,50 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { FormProvider } from 'react-hook-form';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
-import RoudedButton from 'ui/components/inputs/RoudedButton/RoudedButton';
 import PlaceForm from 'ui/components/inputs/UserForms/forms/PlaceForm';
 import { NewUserForm } from 'ui/components/inputs/UserForms/forms/NewUserForm';
 import { PicturePlaceForm } from 'ui/components/inputs/UserForms/UserForm';
 import {
+    ButtonSubmit,
     FormContainer,
-    PageFormContainerBorder,
+    FormDataBorder,
 } from 'ui/components/inputs/UserForms/UserForm.style';
 import { Typography } from '@mui/material';
 
 const RegisterUserPlace: NextPage = () => {
     const { formMethods, onSubmit, isWaitingReponse } = useCadastro();
     return (
-        <Container sx={{ marginBottom: '40px' }}>
+        <Container>
             <Head>Cadastro</Head>
             <PageTitle
-                title="Cadastre-se na Plataforma"
+                title="Cadastre-se na plataforma"
                 subtitle="Primeiros vamos precisar de alguns dados pessoais"
             />
             <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(onSubmit)}>
                     <FormContainer>
-                        <PageFormContainerBorder>
+                        <FormDataBorder>
                             <Typography color={'GrayText'}>
                                 Dados do local
                             </Typography>
                             <PlaceForm />
                             <PicturePlaceForm />
-                        </PageFormContainerBorder>
-                        <PageFormContainerBorder>
+                        </FormDataBorder>
+                        <FormDataBorder style={{ marginTop: '32px' }}>
                             <Typography color={'GrayText'}>
                                 Dados do administrador local
                             </Typography>
                             <NewUserForm />
-                        </PageFormContainerBorder>
-                        <RoudedButton
+                        </FormDataBorder>
+
+                        <ButtonSubmit
                             type="submit"
                             variant="contained"
-                            sx={{ justifySelf: 'center' }}
                             disabled={isWaitingReponse}
                             loading={isWaitingReponse}
                         >
-                            Cadastrar
-                        </RoudedButton>
+                            Cadastre-se
+                        </ButtonSubmit>
                     </FormContainer>
                 </form>
             </FormProvider>

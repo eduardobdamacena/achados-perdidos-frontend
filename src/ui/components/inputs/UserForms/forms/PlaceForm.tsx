@@ -1,5 +1,4 @@
 import TextField from '../../TextField/TextField';
-import { FormContainer } from '../UserForm.style';
 import { useFormContext } from 'react-hook-form';
 import { UserPlaceInterface } from 'data/@types/UserPlaceInterface';
 
@@ -9,7 +8,7 @@ const PlaceForm = () => {
         formState: { errors },
     } = useFormContext<UserPlaceInterface>();
     return (
-        <FormContainer>
+        <>
             <TextField
                 label={'Nome do local'}
                 placeholder={'Digite o nome do local'}
@@ -40,7 +39,7 @@ const PlaceForm = () => {
                 error={errors?.descricao !== undefined}
                 helperText={errors?.descricao?.message}
             />
-        </FormContainer>
+        </>
     );
 };
 

@@ -9,15 +9,17 @@ export const NewUserForm = () => {
         formState: { errors },
     } = useFormContext<RegisterPlaceUserFormDataInterface>();
     return (
-        <FormContainer>
+        <>
             <TextField
                 label={'Nome'}
+                placeholder="Digite o nome completo"
                 {...register('usuario.nome')}
                 error={errors?.usuario?.nome !== undefined}
                 helperText={errors?.usuario?.nome?.message}
             />
             <TextField
                 label={'E-mail'}
+                placeholder="Digite o seu e-mail"
                 type={'email'}
                 {...register('usuario.email')}
                 error={errors?.usuario?.email !== undefined}
@@ -25,6 +27,7 @@ export const NewUserForm = () => {
             />
             <TextField
                 label={'Senha'}
+                placeholder="Digite a sua senha"
                 type={'password'}
                 {...register('usuario.password')}
                 error={errors?.usuario?.password !== undefined}
@@ -32,11 +35,12 @@ export const NewUserForm = () => {
             />
             <TextField
                 label={'Confirme sua senha'}
+                placeholder="Digite a senha novamente"
                 type={'password'}
                 {...register('usuario.password_confirmation')}
                 error={errors?.usuario?.password_confirmation !== undefined}
                 helperText={errors?.usuario?.password_confirmation?.message}
             />
-        </FormContainer>
+        </>
     );
 };

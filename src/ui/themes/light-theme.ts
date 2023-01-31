@@ -15,6 +15,22 @@ const theme = createTheme({
             main: red.A400,
         },
     },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'none',
+                },
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                InputLabelProps: {
+                    shrink: true,
+                },
+            },
+        },
+    },
 });
 
 export default theme;

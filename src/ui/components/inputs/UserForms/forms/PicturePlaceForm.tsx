@@ -8,7 +8,7 @@ export const PicturePlaceForm = () => {
         formState: { errors },
     } = useFormContext<{ imagem: string }>();
     return (
-        <FormContainer>
+        <>
             <Controller
                 name={'imagem'}
                 defaultValue={''}
@@ -23,6 +23,6 @@ export const PicturePlaceForm = () => {
                     />
                 )}
             />
-        </FormContainer>
+        </>
     );
 };
