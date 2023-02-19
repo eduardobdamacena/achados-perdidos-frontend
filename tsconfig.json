@@ -16,10 +16,10 @@
         "jsx": "preserve",
         "incremental": true,
         "paths": {
+            "@partials/*": ["ui/partials/*"],
             "@styles/*": ["ui/styles/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"]
 }
-
