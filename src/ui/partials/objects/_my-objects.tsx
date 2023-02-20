@@ -21,7 +21,7 @@ export const MyObjects: React.FC = () => {
                 title="Lista de Objetos Disponíveis"
                 subtitle="Lista dos objetos não entregues ao dono"
             />
-            <FormElementsContainer>
+            <FormElementsContainer sx={{ marginBottom: '52px' }}>
                 <Table
                     data={objects}
                     rowElement={(item, index) => (

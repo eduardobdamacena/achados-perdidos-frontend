@@ -20,6 +20,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     textTransform: 'none',
+                    boxShadow: 'none',
                 },
             },
         },

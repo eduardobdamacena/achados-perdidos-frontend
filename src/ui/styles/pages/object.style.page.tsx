@@ -5,4 +5,7 @@ export const FormElementsContainer = styled('div')`
     flex-direction: column;
     align-items: center;
     gap: ${({ theme }) => theme.spacing(6.5)};
+    ${({ theme }) => theme.breakpoints.down('md')} {
+        gap: ${({ theme }) => theme.spacing(3.5)};
+    }
 `;
