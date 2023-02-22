@@ -1,7 +1,6 @@
 import { RegisterPlaceUserFormDataInterface } from 'data/@types/FormInterface';
 import { useFormContext } from 'react-hook-form';
 import TextField from '../../TextField/TextField';
-import { FormContainer } from '../UserForm.style';
 
 export const NewUserForm = () => {
     const {

@@ -1,6 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import FileField from '../../FileField/FileField';
-import { FormContainer } from '../UserForm.style';
 
 export const PicturePlaceForm = () => {
     const {

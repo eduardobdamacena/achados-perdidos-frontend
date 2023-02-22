@@ -70,4 +70,18 @@ export const FormSchemaService = {
             })
             .defined();
     },
+    newObject() {
+        return yup.object().shape({
+            nome: yup
+                .string()
+                .min(3, 'Nome muito curto')
+                .max(255, 'Nome muito grande')
+                .required('Informe o nome'),
+            descricao: yup
+                .string()
+                .min(3, 'Descrição muito curta')
+                .max(255, 'Descrição muito grande')
+                .required('Informe a Descrição'),
+        });
+    },
 };

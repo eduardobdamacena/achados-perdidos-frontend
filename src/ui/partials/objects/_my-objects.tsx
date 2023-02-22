@@ -39,7 +39,9 @@ export const MyObjects: React.FC = () => {
                     )}
                     header={['Nome', 'Descrição', 'Ações']}
                 ></Table>
-                <RoudedButton variant="contained">Novo Objeto</RoudedButton>
+                <RoudedButton href="/new-object" variant="contained">
+                    Novo Objeto
+                </RoudedButton>
             </FormElementsContainer>
         </Container>
     );
