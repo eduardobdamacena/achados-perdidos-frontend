@@ -12,7 +12,8 @@ import { FormProvider } from 'react-hook-form';
 import useNewObject from 'data/hooks/pages/useNewObject';
 
 const NewObjectPage: NextPage = () => {
-    const { formMethods, onNewObjectFormSubmit } = useNewObject();
+    const { formMethods, isWaitingResponse, onNewObjectFormSubmit } =
+        useNewObject();
     return (
         <Container sx={{ alignItems: 'center' }}>
             <Head>
@@ -30,7 +31,12 @@ const NewObjectPage: NextPage = () => {
                         <FormDataBorder>
                             <NewObjectForm />
                         </FormDataBorder>
-                        <ButtonSubmit type="submit" variant="contained">
+                        <ButtonSubmit
+                            type="submit"
+                            variant="contained"
+                            loading={isWaitingResponse}
+                            disabled={isWaitingResponse}
+                        >
                             Cadastrar
                         </ButtonSubmit>
                     </FormContainer>
