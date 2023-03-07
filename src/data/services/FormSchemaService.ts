@@ -70,7 +70,7 @@ export const FormSchemaService = {
             })
             .defined();
     },
-    newObject() {
+    object() {
         return yup.object().shape({
             nome: yup
                 .string()

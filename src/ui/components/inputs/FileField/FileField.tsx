@@ -4,12 +4,18 @@ import { FileContainer } from './FileField.style';
 import { ChangeEvent, useState } from 'react';
 
 export interface FileFieldProps
-    extends Omit<TextFieldProps, 'onChange' | 'label'> {
+    extends Omit<TextFieldProps, 'onChange' | 'label' | 'helperText'> {
     label?: string;
+    helperText?: string;
     onChange: (files: FileList) => void;
 }
 
-const FileField: React.FC<FileFieldProps> = ({ label, onChange, ...props }) => {
+const FileField: React.FC<FileFieldProps> = ({
+    label,
+    helperText,
+    onChange,
+    ...props
+}) => {
     const [filePath, setFilePath] = useState('');
 
     function handleFileChange(event: ChangeEvent) {
@@ -24,7 +30,13 @@ const FileField: React.FC<FileFieldProps> = ({ label, onChange, ...props }) => {
 
     return (
         <FileContainer>
-            <TextField label={label} value={filePath} fullWidth {...props} />
+            <TextField
+                label={label}
+                helperText={helperText}
+                value={filePath}
+                fullWidth
+                {...props}
+            />
             <TextField type={'file'} fullWidth onChange={handleFileChange} />
         </FileContainer>
     );

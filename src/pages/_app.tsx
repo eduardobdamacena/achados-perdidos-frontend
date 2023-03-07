@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         userPlaceState.isLogging
     );
 
-    function canShow() {
+    function canShow(): boolean {
         if (privateRoutes.includes(router.pathname)) {
             if (userPlaceState.isLogging) {
                 return false;

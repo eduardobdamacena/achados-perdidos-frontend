@@ -2,7 +2,7 @@ import { UserPlaceInterface } from 'data/@types/UserPlaceInterface';
 import { NextRouter, useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export const privateRoutes = ['/object'];
+export const privateRoutes = ['/object', '/new-object', '/edit-object'];
 export const publicRoutes = ['/', '/register-user-place', '/login'];
 
 export default function useRouterGuard(

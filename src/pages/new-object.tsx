@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
 import {
     ButtonSubmit,
@@ -9,10 +9,11 @@ import {
 } from 'ui/components/inputs/UserForms/UserForm.style';
 import { NewObjectForm } from 'ui/components/inputs/UserForms/forms/NewObjectForm';
 import { FormProvider } from 'react-hook-form';
-import useNewObject from 'data/hooks/pages/useNewObject';
+import useNewObject from 'data/hooks/pages/useNewObject.page';
+import { PictureObjectForm } from 'ui/components/inputs/UserForms/forms/PictureObjectForm';
 
 const NewObjectPage: NextPage = () => {
-    const { formMethods, isWaitingResponse, onNewObjectFormSubmit } =
+    const { formMethods, isWaitingResponse, onNewObjectFormSubmit, error } =
         useNewObject();
     return (
         <Container sx={{ alignItems: 'center' }}>
@@ -30,7 +31,13 @@ const NewObjectPage: NextPage = () => {
                     <FormContainer>
                         <FormDataBorder>
                             <NewObjectForm />
+                            <PictureObjectForm />
                         </FormDataBorder>
+                        {error && (
+                            <Typography textAlign={'center'} color={'red'}>
+                                {error}
+                            </Typography>
+                        )}
                         <ButtonSubmit
                             type="submit"
                             variant="contained"

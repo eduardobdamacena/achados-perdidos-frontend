@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NewObjectFormInterface } from 'data/@types/FormInterface';
+import axios from 'axios';
+import { ObjectFormInterface } from 'data/@types/FormInterface';
 import { ObjectInterface } from 'data/@types/ObjectInterface';
 import { UserPlaceContext } from 'data/context/UserPlaceContext';
 import { ApiServiceHateoas } from 'data/services/ApiService';
@@ -13,11 +14,12 @@ export default function useNewObject() {
     const { userPlaceState } = useContext(UserPlaceContext),
         [isWaitingResponse, setWaitingResponse] = useState(false),
         router = useRouter(),
-        formMethods = useForm<NewObjectFormInterface>({
-            resolver: yupResolver(FormSchemaService.newObject()),
-        });
+        formMethods = useForm<ObjectFormInterface>({
+            resolver: yupResolver(FormSchemaService.object()),
+        }),
+        [error, setError] = useState('');
 
-    function onNewObjectFormSubmit(formData: NewObjectFormInterface) {
+    function onNewObjectFormSubmit(formData: ObjectFormInterface) {
         setWaitingResponse(true);
         ApiServiceHateoas(
             userPlaceState.userPlace.links,
@@ -36,32 +38,46 @@ export default function useNewObject() {
                             'definir_imagem_objeto',
                             async (request) => {
                                 try {
-                                    const imageData =
+                                    const imageFormData =
                                         ObjectService.jsonToFormData({
                                             imagem_objeto: formData.imagem,
                                         });
                                     await request({
-                                        data: imageData,
+                                        data: imageFormData,
                                         headers: {
                                             'Content-Type':
                                                 'multipart/form-data',
                                         },
                                     });
-                                } catch (error) {
-                                    console.log('Erro ao definir imagem: ');
-                                    console.log(error);
-                                }
+                                    router.push('object');
+                                } catch (error) {}
                             }
                         );
                     }
                     router.push('object');
                 } catch (error) {
-                    setWaitingResponse(false);
-                    console.log('Erro ao cadastrar: ' + error);
+                    if (axios.isAxiosError(error)) {
+                        if (error.response?.data.nome) {
+                            formMethods.setError('nome', {
+                                type: 'invalido',
+                                message: error.response.data.nome,
+                            });
+                        }
+                        if (error.response?.data.descricao) {
+                            formMethods.setError('descricao', {
+                                type: 'invalido',
+                                message: error.response.data.descricao,
+                            });
+                        }
+                    } else {
+                        setError(
+                            'Falha ao atualizar o objeto. Tente novamente mais tarde.'
+                        );
+                    }
                 }
             }
         );
     }
 
-    return { formMethods, isWaitingResponse, onNewObjectFormSubmit };
+    return { formMethods, isWaitingResponse, onNewObjectFormSubmit, error };
 }

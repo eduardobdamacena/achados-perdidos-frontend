@@ -57,8 +57,11 @@ export function useUserPlaceReducer(): UserPlaceReducerInterface {
     }, [state.userPlace.usuario.id]);
 
     async function getUserPlace() {
+        if (state.isLogging) {
+            return;
+        }
+        dispatch({ type: 'SET_LOGGING', payload: true });
         try {
-            dispatch({ type: 'SET_LOGGING', payload: true });
             const userPlace = await LoginService.getUserPlace();
             if (userPlace) {
                 dispatch({ type: 'SET_USER_PLACE', payload: userPlace });

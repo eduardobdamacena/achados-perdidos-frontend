@@ -8,7 +8,7 @@ export interface LoginFormDataInterface {
 export interface RegisterPlaceUserFormDataInterface
     extends UserPlaceInterface {}
 
-export interface NewObjectFormInterface {
+export interface ObjectFormInterface {
     nome: string;
     descricao: string;
     imagem: string;

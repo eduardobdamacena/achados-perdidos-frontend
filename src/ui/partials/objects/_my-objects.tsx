@@ -8,7 +8,7 @@ import RoudedButton from 'ui/components/inputs/RoudedButton/RoudedButton';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Link from 'next/link';
-import useMyObjects from 'data/hooks/pages/useMyObjects';
+import useMyObjects from 'data/hooks/pages/useMyObjects.page';
 
 export const MyObjects: React.FC = () => {
     const { objects } = useMyObjects();
@@ -29,7 +29,9 @@ export const MyObjects: React.FC = () => {
                             <TableCell>{item.nome}</TableCell>
                             <TableCell>{item.descricao}</TableCell>
                             <TableCell>
-                                <Link href={'#'}>Editar</Link>
+                                <Link href={`/edit-object?id=${item.id}`}>
+                                    Editar
+                                </Link>
                                 <span>, </span>
                                 <Link href={'#'}>Apagar</Link>
                                 <span>, </span>
@@ -39,9 +41,9 @@ export const MyObjects: React.FC = () => {
                     )}
                     header={['Nome', 'Descrição', 'Ações']}
                 ></Table>
-                <RoudedButton href="/new-object" variant="contained">
-                    Novo Objeto
-                </RoudedButton>
+                <Link href="/new-object">
+                    <RoudedButton variant="contained">Novo Objeto</RoudedButton>
+                </Link>
             </FormElementsContainer>
         </Container>
     );

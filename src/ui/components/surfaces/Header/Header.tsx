@@ -24,9 +24,10 @@ const Header: React.FC<HeaderProps> = (props) => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Link href={'/'}>
-                        <a>
-                            <HeaderLogo src="/logo.png" />
-                        </a>
+                        <HeaderLogo
+                            src="/logo.png"
+                            style={{ cursor: 'pointer' }}
+                        />
                     </Link>
                     <></>
                     <Typography
