@@ -1,4 +1,5 @@
 import {
+    Pagination,
     Table,
     TableBody,
     TableContainer,
@@ -43,4 +44,9 @@ export const TableContainerStyled = styled(TableContainer)`
     &.MuiTableContainer-root {
         max-width: 970px;
     }
+`;
+
+export const TablePaginationStyled = styled(Pagination)`
+    display: flex;
+    justify-content: flex-end;
 `;

@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { FormElementsContainer } from '@styles/pages/object.style.page';
 import Head from 'next/head';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
-import Table from 'ui/components/data-display/Table/Table';
+import Table, { TablePagination } from 'ui/components/data-display/Table/Table';
 import RoudedButton from 'ui/components/inputs/RoudedButton/RoudedButton';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
@@ -11,7 +11,8 @@ import Link from 'next/link';
 import useMyObjects from 'data/hooks/pages/useMyObjects.page';
 
 export const MyObjects: React.FC = () => {
-    const { objects } = useMyObjects();
+    const { objects, currentPage, setCurrentPage, totalPages, itemsPerPage } =
+        useMyObjects();
     return (
         <Container sx={{ alignItems: 'center' }}>
             <Head>
@@ -24,6 +25,8 @@ export const MyObjects: React.FC = () => {
             <FormElementsContainer sx={{ marginBottom: '52px' }}>
                 <Table
                     data={objects}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
                     rowElement={(item, index) => (
                         <TableRow key={index}>
                             <TableCell>{item.nome}</TableCell>
@@ -41,6 +44,13 @@ export const MyObjects: React.FC = () => {
                     )}
                     header={['Nome', 'Descrição', 'Ações']}
                 ></Table>
+                <TablePagination
+                    count={totalPages}
+                    page={currentPage}
+                    onChange={(_event, nextPage) => {
+                        setCurrentPage(nextPage);
+                    }}
+                />
                 <Link href="/new-object">
                     <RoudedButton variant="contained">Novo Objeto</RoudedButton>
                 </Link>
