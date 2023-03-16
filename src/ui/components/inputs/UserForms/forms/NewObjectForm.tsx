@@ -17,6 +17,7 @@ export const NewObjectForm: React.FC = () => {
                 render={({ field: { ref, ...inputProps } }) => (
                     <TextField
                         label={'Nome'}
+                        placeholder={'Digite o nome do objeto'}
                         {...inputProps}
                         error={errors?.nome !== undefined}
                         helperText={errors?.nome?.message}
@@ -30,6 +31,7 @@ export const NewObjectForm: React.FC = () => {
                 render={({ field: { ref, ...inputProps } }) => (
                     <TextField
                         label={'Descrição'}
+                        placeholder={'Digite a descrição do objeto'}
                         {...inputProps}
                         error={errors?.descricao !== undefined}
                         helperText={errors?.descricao?.message}

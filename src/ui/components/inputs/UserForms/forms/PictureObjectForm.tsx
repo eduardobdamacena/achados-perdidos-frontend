@@ -15,6 +15,7 @@ export const PictureObjectForm = () => {
                 render={({ field }) => (
                     <FileField
                         label={'Imagem do local'}
+                        placeholder={'Selecione a imagem do objeto'}
                         onChange={(files) => field.onChange(files[0])}
                         inputProps={{
                             accept: '.jpeg, .jpg, .png',
