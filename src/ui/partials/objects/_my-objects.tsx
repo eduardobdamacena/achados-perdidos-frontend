@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Button, Container, Snackbar } from '@mui/material';
 import { FormElementsContainer } from '@styles/pages/object.style.page';
 import Head from 'next/head';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
@@ -11,8 +11,16 @@ import Link from 'next/link';
 import useMyObjects from 'data/hooks/pages/useMyObjects.page';
 
 export const MyObjects: React.FC = () => {
-    const { objects, currentPage, setCurrentPage, totalPages, itemsPerPage } =
-        useMyObjects();
+    const {
+        objects,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        itemsPerPage,
+        removeObject,
+        messageSnackbar,
+        setMessageSnackbar,
+    } = useMyObjects();
     return (
         <Container sx={{ alignItems: 'center' }}>
             <Head>
@@ -36,7 +44,15 @@ export const MyObjects: React.FC = () => {
                                     Editar
                                 </Link>
                                 <span>, </span>
-                                <Link href={'#'}>Apagar</Link>
+                                <Link href={'#'}>
+                                    <a
+                                        onClick={() => {
+                                            removeObject(item.id as number);
+                                        }}
+                                    >
+                                        Apagar
+                                    </a>
+                                </Link>
                                 <span>, </span>
                                 <Link href={'#'}>Informar Entrega</Link>
                             </TableCell>
@@ -55,6 +71,14 @@ export const MyObjects: React.FC = () => {
                     <RoudedButton variant="contained">Novo Objeto</RoudedButton>
                 </Link>
             </FormElementsContainer>
+            <Snackbar
+                open={messageSnackbar.length > 0}
+                message={messageSnackbar}
+                autoHideDuration={2000}
+                onClose={() => {
+                    setMessageSnackbar('');
+                }}
+            />
         </Container>
     );
 };
