@@ -22,3 +22,12 @@ export const HeaderLogo = styled('img')`
         height: 30px;
     }
 `;
+
+export const OptionsContainer = styled('div')`
+    display: flex;
+    flex: 1;
+    margin: ${({ theme }) => '0px ' + theme.spacing(4) + ' 0px'};
+    color: ${({ theme }) => theme.palette.primary.main};
+    font-size: 18px;
+    font-weight: 400;
+`;
