@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Snackbar } from '@mui/material';
+import { Button, Container, Snackbar, Typography } from '@mui/material';
 import { FormElementsContainer } from '@styles/pages/object.style.page';
 import Head from 'next/head';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Link from 'next/link';
 import useMyObjects from 'data/hooks/pages/useMyObjects.page';
+import { grey } from '@mui/material/colors';
 
 export const MyObjects: React.FC = () => {
     const {
@@ -31,42 +32,57 @@ export const MyObjects: React.FC = () => {
                 subtitle="Lista dos objetos não entregues ao dono"
             />
             <FormElementsContainer sx={{ marginBottom: '52px' }}>
-                <Table
-                    data={objects}
-                    itemsPerPage={itemsPerPage}
-                    currentPage={currentPage}
-                    rowElement={(item, index) => (
-                        <TableRow key={index}>
-                            <TableCell>{item.nome}</TableCell>
-                            <TableCell>{item.descricao}</TableCell>
-                            <TableCell>
-                                <Link href={`/edit-object?id=${item.id}`}>
-                                    Editar
-                                </Link>
-                                <span>, </span>
-                                <Link href={'#'}>
-                                    <a
-                                        onClick={() => {
-                                            removeObject(item.id as number);
-                                        }}
-                                    >
-                                        Apagar
-                                    </a>
-                                </Link>
-                                <span>, </span>
-                                <Link href={'#'}>Informar Entrega</Link>
-                            </TableCell>
-                        </TableRow>
-                    )}
-                    header={['Nome', 'Descrição', 'Ações']}
-                ></Table>
-                <TablePagination
-                    count={totalPages}
-                    page={currentPage}
-                    onChange={(_event, nextPage) => {
-                        setCurrentPage(nextPage);
-                    }}
-                />
+                {objects.length > 0 ? (
+                    <>
+                        <Table
+                            data={objects}
+                            itemsPerPage={itemsPerPage}
+                            currentPage={currentPage}
+                            rowElement={(item, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{item.nome}</TableCell>
+                                    <TableCell>{item.descricao}</TableCell>
+                                    <TableCell>
+                                        <Link
+                                            href={`/edit-object?id=${item.id}`}
+                                        >
+                                            Editar
+                                        </Link>
+                                        <span>, </span>
+                                        <Link href={'#'}>
+                                            <a
+                                                onClick={() => {
+                                                    removeObject(
+                                                        item.id as number
+                                                    );
+                                                }}
+                                            >
+                                                Apagar
+                                            </a>
+                                        </Link>
+                                        <span>, </span>
+                                        <Link href={'#'}>Informar Entrega</Link>
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            header={['Nome', 'Descrição', 'Ações']}
+                        ></Table>
+                        {totalPages > 1 && (
+                            <TablePagination
+                                count={totalPages}
+                                page={currentPage}
+                                onChange={(_event, nextPage) => {
+                                    setCurrentPage(nextPage);
+                                }}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <Typography color={'grey'}>
+                        Nenhum objeto cadastrado ainda
+                    </Typography>
+                )}
+
                 <Link href="/new-object">
                     <RoudedButton variant="contained">Novo Objeto</RoudedButton>
                 </Link>
