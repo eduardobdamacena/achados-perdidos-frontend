@@ -1,10 +1,12 @@
 import { Button, styled } from '@mui/material';
 import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export const ButtonMenuStyled = styled(Button)`
     &.MuiButtonBase-root {
         padding: 0 0 0 29px;
         height: 54px;
+        width: 100%;
         ${({ theme }) => theme.breakpoints.down('md')} {
             padding: 0 13px;
             font-size: 11px;
@@ -28,4 +30,23 @@ export const ButtonMenuStyled = styled(Button)`
     font-size: 18px;
     font-weight: 400;
 `;
-export const StyledMenu = styled(Menu)``;
+export const MenuStyled = styled(Menu)`
+    .MuiMenu-paper {
+        border: 0.5px solid #9eadba;
+        box-shadow: none;
+        border-radius: 5px;
+    }
+    .MuiMenu-list {
+        padding: 0px;
+    }
+`;
+
+export const MenuItemStyled = styled(MenuItem)`
+    font-size: 18px;
+    padding: 11px 58px;
+
+    ${({ theme }) => theme.breakpoints.down('md')} {
+        font-size: 11px;
+        padding: 8px 27px;
+    }
+`;

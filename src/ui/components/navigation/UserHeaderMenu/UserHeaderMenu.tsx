@@ -1,5 +1,8 @@
-import MenuItem from '@mui/material/MenuItem';
-import { ButtonMenuStyled, StyledMenu } from './UserHeaderMenu.style';
+import {
+    ButtonMenuStyled,
+    MenuItemStyled,
+    MenuStyled,
+} from './UserHeaderMenu.style';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useRef } from 'react';
 import Link from 'next/link';
@@ -26,27 +29,39 @@ const UserHeaderMenu: React.FC<UserHeaderMenuProps> = (props) => {
             >
                 {props.user_name}
             </ButtonMenuStyled>
-            <StyledMenu
+            <MenuStyled
                 open={props.open}
                 onClose={props.onMenuClose}
                 onClick={props.onMenuClick}
                 anchorEl={buttonRef.current}
+                keepMounted
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'right',
+                    horizontal: 'left',
                 }}
                 transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'left',
+                }}
+                PaperProps={{
+                    style: {
+                        width: buttonRef.current
+                            ? buttonRef.current.clientWidth
+                            : undefined,
+                    },
                 }}
             >
-                <MenuItem id="alterar-dados" disableRipple>
+                <MenuItemStyled id="alterar-dados" disableRipple>
                     <Link href={''}>Alterar Dados</Link>
-                </MenuItem>
-                <MenuItem id="logout" disableRipple onClick={props.onLogout}>
+                </MenuItemStyled>
+                <MenuItemStyled
+                    id="logout"
+                    disableRipple
+                    onClick={props.onLogout}
+                >
                     Sair
-                </MenuItem>
-            </StyledMenu>
+                </MenuItemStyled>
+            </MenuStyled>
         </div>
     );
 };
