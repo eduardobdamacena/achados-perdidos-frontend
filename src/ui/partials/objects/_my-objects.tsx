@@ -10,6 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import Link from 'next/link';
 import useMyObjects from 'data/hooks/pages/useMyObjects.page';
 import { grey } from '@mui/material/colors';
+import { RemoveDialog } from './_object-dialogs';
+import { ObjectInterface } from 'data/@types/ObjectInterface';
 
 export const MyObjects: React.FC = () => {
     const {
@@ -20,6 +22,8 @@ export const MyObjects: React.FC = () => {
         itemsPerPage,
         removeObject,
         messageSnackbar,
+        objectRemove,
+        setObjectRemove,
         setMessageSnackbar,
     } = useMyObjects();
     return (
@@ -52,9 +56,7 @@ export const MyObjects: React.FC = () => {
                                         <Link href={'#'}>
                                             <a
                                                 onClick={() => {
-                                                    removeObject(
-                                                        item.id as number
-                                                    );
+                                                    setObjectRemove(item);
                                                 }}
                                             >
                                                 Apagar
@@ -95,6 +97,15 @@ export const MyObjects: React.FC = () => {
                     setMessageSnackbar('');
                 }}
             />
+            {objectRemove.id && (
+                <RemoveDialog
+                    object={objectRemove}
+                    onCancel={() => {
+                        setObjectRemove({} as ObjectInterface);
+                    }}
+                    onConfirm={removeObject}
+                />
+            )}
         </Container>
     );
 };

@@ -3,12 +3,14 @@ import { useContext, useState } from 'react';
 import usePagination from '../usePagination.hook';
 import { ApiServiceHateoas } from 'data/services/ApiService';
 import { mutate } from 'swr';
+import { ObjectInterface } from 'data/@types/ObjectInterface';
 
 export default function useMyObjects() {
     const { objectState } = useContext(ObjectContext),
         objects = objectState.objects,
         { currentPage, setCurrentPage, totalPages, itemsPerPage } =
             usePagination(objects, 5),
+        [objectRemove, setObjectRemove] = useState({} as ObjectInterface),
         [messageSnackbar, setMessageSnackbar] = useState('');
 
     function removeObject(objectId: number) {
@@ -23,6 +25,7 @@ export default function useMyObjects() {
                     try {
                         await request();
                         updateObjects();
+                        setObjectRemove({} as ObjectInterface);
                         setMessageSnackbar('Objeto removido com sucesso!');
                     } catch (error) {
                         console.log(error);
@@ -44,6 +47,8 @@ export default function useMyObjects() {
         itemsPerPage,
         removeObject,
         messageSnackbar,
+        objectRemove,
+        setObjectRemove,
         setMessageSnackbar,
     };
 }
