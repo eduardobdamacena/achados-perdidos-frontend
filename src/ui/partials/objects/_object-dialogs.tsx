@@ -36,3 +36,27 @@ export const RemoveDialog: React.FC<ConfirmDialogProps> = (props) => {
         </Dialog>
     );
 };
+
+interface NotificationDialogProps {
+    title: string;
+    description: string;
+    onClose: () => void;
+}
+
+export const NotificationDialog: React.FC<NotificationDialogProps> = (
+    props
+) => {
+    return (
+        <Dialog open={true} onClose={props.onClose}>
+            <DialogTitle>{props.title}</DialogTitle>
+            <DialogContent>
+                <DialogContentText>{props.description}</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={props.onClose} autoFocus>
+                    Ok
+                </Button>
+            </DialogActions>
+        </Dialog>
+    );
+};

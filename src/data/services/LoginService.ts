@@ -34,7 +34,7 @@ export const LoginService = {
         return undefined;
     },
     logout() {
-        ApiService.post('api/auth/logout/', {
+        ApiService.post('api/auth/logout', {
             refresh: LocalStorage.get('token_refresh', ''),
         });
         LocalStorage.clear('token');

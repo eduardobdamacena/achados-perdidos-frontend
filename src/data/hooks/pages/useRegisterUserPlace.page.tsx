@@ -40,7 +40,7 @@ export default function useRegisterUserPlace() {
                         email: data.usuario.email,
                         password: data.usuario.password as string,
                     });
-                    if (login_success) {
+                    if (login_success && data.imagem) {
                         // Upload image
                         const imageFormData = ObjectService.jsonToFormData({
                             imagem_local: data.imagem,
@@ -80,6 +80,25 @@ export default function useRegisterUserPlace() {
                                             }
                                         );
                                     });
+                                } catch (error: any) {}
+                            }
+                        );
+                    } else if (login_success) {
+                        // Get user place and dispatch
+                        ApiServiceHateoas(
+                            new_place.links,
+                            'self',
+                            (request) => {
+                                try {
+                                    request<UserPlaceInterface>().then(
+                                        (reponse) => {
+                                            const userPlace = reponse.data;
+                                            userPlaceDispatch({
+                                                type: 'SET_USER_PLACE',
+                                                payload: userPlace,
+                                            });
+                                        }
+                                    );
                                 } catch (error: any) {}
                             }
                         );

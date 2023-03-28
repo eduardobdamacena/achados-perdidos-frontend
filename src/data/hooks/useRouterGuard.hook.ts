@@ -3,7 +3,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export const privateRoutes = ['/object', '/new-object', '/edit-object'];
-export const publicRoutes = ['/', '/register-user-place', '/login'];
+export const publicRoutes = ['/register-user-place', '/login'];
 
 export default function useRouterGuard(
     userPlace: UserPlaceInterface,
