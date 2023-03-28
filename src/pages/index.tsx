@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { Container } from '@mui/material';
 import PageTitle from 'ui/components/data-display/PageTitle/PageTitle';
 import Head from 'next/head';
 import TextField from 'ui/components/inputs/TextField/TextField';

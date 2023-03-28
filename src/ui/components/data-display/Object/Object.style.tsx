@@ -33,8 +33,10 @@ export const ObjectInformationContainer = styled('div')`
 export const ObjectTitle = styled(Typography)`
     font-size: 18px;
     font-weight: 500;
+    line-height: 16px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 12px;
+        line-height: 13px;
     }
 `;
 
@@ -43,10 +45,12 @@ export const ObjectDescription = styled(Typography)`
     font-weight: 400;
     margin-top: 16px;
     width: 187px;
+    line-height: 16px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 11px;
         margin-top: 5px;
         width: 112px;
+        line-height: 13px;
     }
 `;
 
@@ -54,8 +58,10 @@ export const ObjectDate = styled(Typography)`
     font-size: 14px;
     font-weight: 400;
     margin-top: 0px;
+    line-height: 16px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 11px;
+        line-height: 13px;
     }
 `;
 

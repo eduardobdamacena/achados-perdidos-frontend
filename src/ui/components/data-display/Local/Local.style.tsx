@@ -31,8 +31,10 @@ export const LocalInformationContainer = styled('div')`
 export const LocalTitle = styled(Typography)`
     font-size: 18px;
     font-weight: 500;
+    line-height: 16px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 12px;
+        line-height: 13px;
     }
 `;
 
@@ -41,10 +43,12 @@ export const LocalAddress = styled(Typography)`
     font-weight: 400;
     margin-top: 16px;
     width: 187px;
+    line-height: 16px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 11px;
         margin-top: 5px;
         width: 112px;
+        line-height: 13px;
     }
 `;
 
