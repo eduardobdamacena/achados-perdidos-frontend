@@ -5,16 +5,20 @@ import ObjectComponent from 'ui/components/data-display/Object/Object';
 import { NotificationDialog } from '@partials/objects/_object-dialogs';
 import Head from 'next/head';
 import useLocalObjects from 'data/hooks/pages/useLocalObjects.page';
+import { TablePagination } from 'ui/components/data-display/Table/Table';
 
 export const ListLocalObjects = () => {
     const router = useRouter(),
         id = router.query.id;
     const {
-        localObjects,
+        listData,
         localSelected,
         seeContact,
         setSeeContact,
         isFetching,
+        currentPage,
+        setCurrentPage,
+        totalPages,
     } = useLocalObjects(id as string);
 
     return (
@@ -34,17 +38,34 @@ export const ListLocalObjects = () => {
                             'Verifique na lista abaixo se o objeto que perdeu está disponível nesse local'
                         }
                     />
-                    {localObjects.map((item) => (
+                    {listData.map((item) => (
                         <ObjectComponent
                             key={item.id}
                             object={item}
                             onClickSeeContact={() => setSeeContact(true)}
                         />
                     ))}
-                    {localObjects.length == 0 && (
+                    {listData.length == 0 && (
                         <Typography color={'grey'} align="center">
                             Nenhum objeto disponível neste local
                         </Typography>
+                    )}
+                    {totalPages > 1 && (
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '64px',
+                            }}
+                        >
+                            <TablePagination
+                                count={totalPages}
+                                page={currentPage}
+                                onChange={(_event, nextPage) => {
+                                    setCurrentPage(nextPage);
+                                }}
+                            />
+                        </div>
                     )}
                     {seeContact && (
                         <NotificationDialog

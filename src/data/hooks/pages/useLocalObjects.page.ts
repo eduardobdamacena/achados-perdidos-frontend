@@ -1,8 +1,10 @@
 import { ShortObjectInterface } from 'data/@types/ObjectInterface';
 import { PlaceInterface } from 'data/@types/PlaceInterface';
 import { ApiServiceHateoas } from 'data/services/ApiService';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { LocalContext } from 'data/context/LocalContext';
+import usePagination from '../usePagination.hook';
+import { BrowserService } from 'data/services/BrowserService';
 
 export default function useLocalObjects(id: string) {
     const [localObjects, setLocalObjects] = useState<ShortObjectInterface[]>(
@@ -11,7 +13,22 @@ export default function useLocalObjects(id: string) {
         { locationsState } = useContext(LocalContext),
         [localSelected, setLocalSelected] = useState<PlaceInterface>(),
         [seeContact, setSeeContact] = useState(false),
-        [isFetching, setIsFetching] = useState(false);
+        [isFetching, setIsFetching] = useState(false),
+        { currentPage, setCurrentPage, totalPages, itemsPerPage } =
+            usePagination(localObjects, 5),
+        listData = useMemo<ShortObjectInterface[]>(() => {
+            if (itemsPerPage !== undefined && currentPage !== undefined) {
+                return localObjects.slice(
+                    (currentPage - 1) * itemsPerPage,
+                    (currentPage - 1) * itemsPerPage + itemsPerPage
+                );
+            }
+            return localObjects;
+        }, [localObjects, itemsPerPage, currentPage]);
+
+    useEffect(() => {
+        BrowserService.scrollToTop();
+    }, [currentPage]);
 
     useEffect(() => {
         if (id) {
@@ -41,10 +58,13 @@ export default function useLocalObjects(id: string) {
     }, [id]);
 
     return {
-        localObjects,
+        listData,
         localSelected,
         seeContact,
         setSeeContact,
         isFetching,
+        currentPage,
+        setCurrentPage,
+        totalPages,
     };
 }
