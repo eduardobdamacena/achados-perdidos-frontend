@@ -10,7 +10,9 @@ export default function useLocalObjects(id: string) {
         ),
         { locationsState } = useContext(LocalContext),
         [localSelected, setLocalSelected] = useState<PlaceInterface>(),
-        [seeContact, setSeeContact] = useState(false);
+        [seeContact, setSeeContact] = useState(false),
+        [isFetching, setIsFetching] = useState(false);
+
     useEffect(() => {
         if (id) {
             const local = locationsState.locations.find(
@@ -18,16 +20,22 @@ export default function useLocalObjects(id: string) {
             );
             if (local) {
                 setLocalSelected(local);
-                ApiServiceHateoas(
-                    local.links,
-                    'objetos_local',
-                    async (request) => {
-                        const response = await request<
-                            ShortObjectInterface[]
-                        >();
-                        setLocalObjects(response.data);
-                    }
-                );
+                setIsFetching(true);
+                try {
+                    ApiServiceHateoas(
+                        local.links,
+                        'objetos_local',
+                        async (request) => {
+                            const response = await request<
+                                ShortObjectInterface[]
+                            >();
+                            setLocalObjects(response.data);
+                            setIsFetching(false);
+                        }
+                    );
+                } catch (error) {
+                    setIsFetching(false);
+                }
             }
         }
     }, [id]);
@@ -37,5 +45,6 @@ export default function useLocalObjects(id: string) {
         localSelected,
         seeContact,
         setSeeContact,
+        isFetching,
     };
 }

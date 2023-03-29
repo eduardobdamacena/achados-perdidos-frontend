@@ -1,7 +1,7 @@
 import { PlaceInterface } from 'data/@types/PlaceInterface';
 import { ExternalServicesContext } from 'data/context/ExternalServicesContext';
 import { ApiServiceHateoas } from 'data/services/ApiService';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocalContext } from 'data/context/LocalContext';
 
 export default function useSearchLocations(searchTerm: string) {
@@ -9,7 +9,9 @@ export default function useSearchLocations(searchTerm: string) {
             externalServicesState: { externalServices },
         } = useContext(ExternalServicesContext),
         { locationsState, locationsDispatch } = useContext(LocalContext),
-        locations = locationsState.locations;
+        locations = locationsState.locations,
+        [isFetching, setIsFetching] = useState(false);
+
     useEffect(() => {
         if (searchTerm) {
             searchLocations();
@@ -18,6 +20,7 @@ export default function useSearchLocations(searchTerm: string) {
 
     function searchLocations() {
         try {
+            setIsFetching(true);
             ApiServiceHateoas(
                 externalServices,
                 'busca_local',
@@ -29,12 +32,16 @@ export default function useSearchLocations(searchTerm: string) {
                         type: 'SET_LOCATIONS',
                         payload: response.data,
                     });
+                    setIsFetching(false);
                 }
             );
-        } catch (error) {}
+        } catch (error) {
+            setIsFetching(false);
+        }
     }
 
     return {
         locations,
+        isFetching,
     };
 }
