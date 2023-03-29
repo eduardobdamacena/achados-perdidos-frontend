@@ -62,12 +62,17 @@ export const ObjectDate = styled(Typography)`
     ${({ theme }) => theme.breakpoints.down('md')} {
         font-size: 11px;
         line-height: 13px;
+        width: 112px;
     }
 `;
 
 export const ContactButton = styled(RoudedButton)`
     variant: 'contained';
     margin-top: 21px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 20px;
+    height: 33px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         margin-top: 8px;
         font-size: 9px;

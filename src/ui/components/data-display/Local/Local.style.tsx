@@ -55,10 +55,15 @@ export const LocalAddress = styled(Typography)`
 export const SeeObjectsButton = styled(RoudedButton)`
     variant: 'contained';
     margin-top: 21px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 29px;
+    height: 33px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         margin-top: 8px;
         font-size: 9px;
         height: 20px;
+        padding: 4px 19px;
     }
 `;
 
