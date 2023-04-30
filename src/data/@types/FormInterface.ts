@@ -13,3 +13,8 @@ export interface ObjectFormInterface {
     descricao: string;
     imagem: string;
 }
+
+export interface InformOnwerFormInterface {
+    dono_nome: string;
+    dono_cpf: string;
+}

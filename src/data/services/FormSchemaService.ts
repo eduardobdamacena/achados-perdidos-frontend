@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { ValidationService } from './ValidationService';
 
 export const FormSchemaService = {
     login() {
@@ -70,6 +71,36 @@ export const FormSchemaService = {
             })
             .defined();
     },
+    editUser() {
+        return yup.object().shape({
+            usuario: yup.object().shape({
+                nome: yup
+                    .string()
+                    .min(3, 'Nome muito curto')
+                    .max(255, 'Nome muito grande')
+                    .required('Informe o nome'),
+                email: yup
+                    .string()
+                    .min(3, 'E-mail muito curto')
+                    .max(255, 'E-mail muito grande')
+                    .required('Informe o email'),
+                password: yup
+                    .string()
+                    .nullable()
+                    .default(undefined)
+                    .notRequired(),
+                password_confirmation: yup
+                    .string()
+                    .nullable()
+                    .default(undefined)
+                    .notRequired()
+                    .oneOf(
+                        [yup.ref('password'), null],
+                        'As senhas não estão iguais'
+                    ),
+            }),
+        });
+    },
     object() {
         return yup.object().shape({
             nome: yup
@@ -82,6 +113,18 @@ export const FormSchemaService = {
                 .min(3, 'Descrição muito curta')
                 .max(255, 'Descrição muito grande')
                 .required('Informe a Descrição'),
+        });
+    },
+    objectOwner() {
+        return yup.object().shape({
+            dono_nome: yup
+                .string()
+                .min(3, 'Nome muito curto')
+                .max(255, 'Nome muito grande')
+                .required('Informe o nome'),
+            dono_cpf: yup
+                .string()
+                .test('cpf', 'CPF inválido', ValidationService.cpf),
         });
     },
 };

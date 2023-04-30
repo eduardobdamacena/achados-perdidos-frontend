@@ -1,18 +1,23 @@
 import { RegisterPlaceUserFormDataInterface } from 'data/@types/FormInterface';
 import { useFormContext } from 'react-hook-form';
 import TextField from '../../TextField/TextField';
+import { useContext } from 'react';
+import { UserPlaceContext } from 'data/context/UserPlaceContext';
 
 export const NewUserForm = () => {
     const {
-        register,
-        formState: { errors },
-    } = useFormContext<RegisterPlaceUserFormDataInterface>();
+            register,
+            formState: { errors },
+        } = useFormContext<RegisterPlaceUserFormDataInterface>(),
+        { usuario } = useContext(UserPlaceContext).userPlaceState.userPlace;
+
     return (
         <>
             <TextField
                 label={'Nome'}
                 placeholder="Digite o nome completo"
                 {...register('usuario.nome')}
+                defaultValue={usuario.nome}
                 error={errors?.usuario?.nome !== undefined}
                 helperText={errors?.usuario?.nome?.message}
             />
@@ -21,6 +26,7 @@ export const NewUserForm = () => {
                 placeholder="Digite o seu e-mail"
                 type={'email'}
                 {...register('usuario.email')}
+                defaultValue={usuario.email}
                 error={errors?.usuario?.email !== undefined}
                 helperText={errors?.usuario?.email?.message}
             />

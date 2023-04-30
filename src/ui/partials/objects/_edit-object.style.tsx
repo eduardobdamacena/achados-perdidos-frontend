@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-export const ObjectPicture = styled('div')`
+export const PictureViewer = styled('div')`
     display: flex;
     position: relative;
     align-items: center;

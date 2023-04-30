@@ -10,7 +10,7 @@ import {
     FormDataBorder,
 } from 'ui/components/inputs/UserForms/UserForm.style';
 import { NewObjectForm } from 'ui/components/inputs/UserForms/forms/NewObjectForm';
-import { ObjectPicture } from './_edit-object.style';
+import { PictureViewer } from './_edit-object.style';
 import { PictureObjectForm } from 'ui/components/inputs/UserForms/forms/PictureObjectForm';
 
 const EditObject: React.FC<{ id: string }> = ({ id }) => {
@@ -48,7 +48,7 @@ const EditObject: React.FC<{ id: string }> = ({ id }) => {
                         <FormDataBorder>
                             <NewObjectForm />
                             {object.imagem && showImage && (
-                                <ObjectPicture>
+                                <PictureViewer>
                                     <img src={object.imagem} />
                                     <Button
                                         color="error"
@@ -58,7 +58,7 @@ const EditObject: React.FC<{ id: string }> = ({ id }) => {
                                     >
                                         Remover
                                     </Button>
-                                </ObjectPicture>
+                                </PictureViewer>
                             )}
                             {(!object.imagem || !showImage) && (
                                 <PictureObjectForm />

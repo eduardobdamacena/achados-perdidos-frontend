@@ -63,7 +63,11 @@ export const MyObjects: React.FC = () => {
                                             </a>
                                         </Link>
                                         <span>, </span>
-                                        <Link href={'#'}>Informar Entrega</Link>
+                                        <Link
+                                            href={`/inform-owner?id=${item.id}`}
+                                        >
+                                            Informar Entrega
+                                        </Link>
                                     </TableCell>
                                 </TableRow>
                             )}

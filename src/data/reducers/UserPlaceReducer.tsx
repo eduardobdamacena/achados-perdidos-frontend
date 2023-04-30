@@ -60,6 +60,7 @@ export function useUserPlaceReducer(): UserPlaceReducerInterface {
         if (state.isLogging) {
             return;
         }
+
         dispatch({ type: 'SET_LOGGING', payload: true });
         try {
             const userPlace = await LoginService.getUserPlace();
@@ -68,7 +69,9 @@ export function useUserPlaceReducer(): UserPlaceReducerInterface {
             } else {
                 dispatch({ type: 'SET_LOGGING', payload: false });
             }
-        } catch (error) {}
+        } catch (error) {
+            dispatch({ type: 'SET_LOGGING', payload: false });
+        }
     }
 
     return {
