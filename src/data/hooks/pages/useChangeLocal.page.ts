@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import { RegisterPlaceUserFormDataInterface } from 'data/@types/FormInterface';
 import { UserPlaceInterface } from 'data/@types/UserPlaceInterface';
 import { UserPlaceContext } from 'data/context/UserPlaceContext';
@@ -29,6 +30,7 @@ export default function useChangeLocal() {
     }
 
     async function updatePicture() {
+        setWaitingResponse(true);
         if (picture) {
             const imageFormData = ObjectService.jsonToFormData({
                 imagem_local: picture,
@@ -57,16 +59,28 @@ export default function useChangeLocal() {
             userPlace.links,
             'atualizar_local',
             async (request) => {
-                const updatedUserLocal = (
-                    await request<UserPlaceInterface>({
-                        data: data,
-                    })
-                ).data;
-                userPlaceDispatch({
-                    type: 'SET_USER_PLACE',
-                    payload: updatedUserLocal,
-                });
-                setSnackMessage('Dados atualizados com sucesso');
+                try {
+                    const updatedUserLocal = (
+                        await request<UserPlaceInterface>({
+                            data: data,
+                        })
+                    ).data;
+                    userPlaceDispatch({
+                        type: 'SET_USER_PLACE',
+                        payload: updatedUserLocal,
+                    });
+                    setSnackMessage('Dados atualizados com sucesso');
+                } catch (error) {
+                    if (axios.isAxiosError(error)) {
+                        if (error.response?.data?.usuario?.email) {
+                            formMethods.setError('usuario.email', {
+                                type: 'invalido',
+                                message: error.response?.data?.usuario?.email,
+                            });
+                        }
+                    }
+                }
+                setWaitingResponse(false);
             }
         );
     }

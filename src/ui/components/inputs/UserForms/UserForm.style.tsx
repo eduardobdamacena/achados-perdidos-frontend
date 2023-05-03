@@ -36,5 +36,6 @@ export const ButtonSubmit = styled(RoudedButton)`
     min-height: 54px;
     ${({ theme }) => theme.breakpoints.down('md')} {
         min-height: 32px;
+        margin: 28px 0px;
     }
 `;

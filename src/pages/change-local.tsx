@@ -14,6 +14,13 @@ import { NewUserForm } from 'ui/components/inputs/UserForms/forms/NewUserForm';
 import { PictureViewer } from '@partials/objects/_edit-object.style';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileField from 'ui/components/inputs/FileField/FileField';
+import {
+    ButtonDeletePlace,
+    DeletePlaceBorder,
+    DeletePlaceContainer,
+    DescriptionDeletePlace,
+    TitleDeletePlace,
+} from '@styles/pages/change-local.style.page';
 
 const ChangeLocalPage: NextPage = () => {
     const {
@@ -75,7 +82,6 @@ const ChangeLocalPage: NextPage = () => {
                             </Typography>
                             <NewUserForm />
                         </FormDataBorder>
-
                         <ButtonSubmit
                             type="submit"
                             variant="contained"
@@ -87,6 +93,20 @@ const ChangeLocalPage: NextPage = () => {
                     </FormContainer>
                 </form>
             </FormProvider>
+            <DeletePlaceContainer>
+                <DeletePlaceBorder>
+                    <TitleDeletePlace color={'GrayText'}>
+                        Excluir local da plataforma
+                    </TitleDeletePlace>
+                    <DescriptionDeletePlace color={'GrayText'}>
+                        Tem certeza que deseja excluir o local da plataforma?
+                        Todos os itens serão excluídos junto com o local.
+                    </DescriptionDeletePlace>
+                    <ButtonDeletePlace variant="contained" color="error">
+                        Excluir local
+                    </ButtonDeletePlace>
+                </DeletePlaceBorder>
+            </DeletePlaceContainer>
             <Snackbar
                 open={snackMessage.length > 0}
                 message={snackMessage}
