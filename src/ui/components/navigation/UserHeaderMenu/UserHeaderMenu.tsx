@@ -51,9 +51,11 @@ const UserHeaderMenu: React.FC<UserHeaderMenuProps> = (props) => {
                     },
                 }}
             >
-                <MenuItemStyled id="alterar-dados" disableRipple>
-                    <Link href={'/change-local'}>Alterar Dados</Link>
-                </MenuItemStyled>
+                <Link href={'/change-local'}>
+                    <MenuItemStyled id="alterar-dados" disableRipple>
+                        Alterar Dados
+                    </MenuItemStyled>
+                </Link>
                 <MenuItemStyled
                     id="logout"
                     disableRipple
