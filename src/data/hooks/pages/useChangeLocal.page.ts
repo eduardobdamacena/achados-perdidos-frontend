@@ -6,6 +6,7 @@ import { UserPlaceContext } from 'data/context/UserPlaceContext';
 import { ApiServiceHateoas } from 'data/services/ApiService';
 import { FormSchemaService } from 'data/services/FormSchemaService';
 import { ObjectService } from 'data/services/ObjectService';
+import { LocalStorage } from 'data/services/StorageService';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -20,7 +21,8 @@ export default function useChangeLocal() {
         userPlace = userPlaceState.userPlace,
         [showImage, setShowImage] = useState(true),
         [picture, setPicture] = useState<File>(),
-        [snackMessage, setSnackMessage] = useState('');
+        [snackMessage, setSnackMessage] = useState(''),
+        [showDeleteLocalDialog, setShowDeleteLocalDialog] = useState(false);
 
     function onPictureChange(files: FileList) {
         if (files !== null && files.length) {
@@ -94,6 +96,15 @@ export default function useChangeLocal() {
         setShowImage(false);
     }
 
+    function deletePlace() {
+        ApiServiceHateoas(userPlace.links, 'apagar_local', async (request) => {
+            await request();
+            LocalStorage.clear('token');
+            LocalStorage.clear('token_refresh');
+            window.location.reload();
+        });
+    }
+
     return {
         onSubmit,
         formMethods,
@@ -104,5 +115,8 @@ export default function useChangeLocal() {
         onPictureChange,
         snackMessage,
         setSnackMessage,
+        deletePlace,
+        showDeleteLocalDialog,
+        setShowDeleteLocalDialog,
     };
 }

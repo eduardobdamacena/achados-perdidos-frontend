@@ -21,6 +21,7 @@ import {
     DescriptionDeletePlace,
     TitleDeletePlace,
 } from '@styles/pages/change-local.style.page';
+import { DeleteLocalDialog } from '@partials/Local/_local-dialogs';
 
 const ChangeLocalPage: NextPage = () => {
     const {
@@ -33,6 +34,9 @@ const ChangeLocalPage: NextPage = () => {
         onPictureChange,
         snackMessage,
         setSnackMessage,
+        deletePlace,
+        showDeleteLocalDialog,
+        setShowDeleteLocalDialog,
     } = useChangeLocal();
     return (
         <Container>
@@ -102,7 +106,11 @@ const ChangeLocalPage: NextPage = () => {
                         Tem certeza que deseja excluir o local da plataforma?
                         Todos os itens serão excluídos junto com o local.
                     </DescriptionDeletePlace>
-                    <ButtonDeletePlace variant="contained" color="error">
+                    <ButtonDeletePlace
+                        variant="contained"
+                        color="error"
+                        onClick={() => setShowDeleteLocalDialog(true)}
+                    >
                         Excluir local
                     </ButtonDeletePlace>
                 </DeletePlaceBorder>
@@ -113,6 +121,14 @@ const ChangeLocalPage: NextPage = () => {
                 autoHideDuration={4000}
                 onClose={() => setSnackMessage('')}
             />
+            {showDeleteLocalDialog && (
+                <DeleteLocalDialog
+                    title="Tem certeza que deseja remover o local?"
+                    description="Todos os dados associados ao local serão apagados"
+                    onConfirm={deletePlace}
+                    onCancel={() => setShowDeleteLocalDialog(false)}
+                />
+            )}
         </Container>
     );
 };
