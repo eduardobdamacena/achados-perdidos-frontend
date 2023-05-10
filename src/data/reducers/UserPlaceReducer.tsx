@@ -15,7 +15,7 @@ export const initialState = {
             email: '',
         },
     } as UserPlaceInterface,
-    isLogging: false,
+    isLogging: true,
 };
 
 export type InitialStateType = typeof initialState;
@@ -57,15 +57,12 @@ export function useUserPlaceReducer(): UserPlaceReducerInterface {
     }, [state.userPlace.usuario.id]);
 
     async function getUserPlace() {
-        if (state.isLogging) {
-            return;
-        }
-
         dispatch({ type: 'SET_LOGGING', payload: true });
         try {
             const userPlace = await LoginService.getUserPlace();
             if (userPlace) {
                 dispatch({ type: 'SET_USER_PLACE', payload: userPlace });
+                dispatch({ type: 'SET_LOGGING', payload: false });
             } else {
                 dispatch({ type: 'SET_LOGGING', payload: false });
             }

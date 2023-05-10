@@ -9,7 +9,6 @@ import { TextService } from 'data/services/TextService';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { mutate } from 'swr';
 
 export default function useInformOwner(objectId: string | undefined) {
     const formMethods = useForm<InformOnwerFormInterface>({
@@ -27,49 +26,43 @@ export default function useInformOwner(objectId: string | undefined) {
     }, [objectState, objectId]);
 
     function onSubmit(data: InformOnwerFormInterface) {
-        if (objectId) {
-            if (objectSelected) {
-                ApiServiceHateoas(
-                    objectSelected.links,
-                    'definir_dono_objeto',
-                    async (request) => {
-                        try {
-                            const cpf = TextService.getNumbersFromText(
-                                data.dono_cpf
-                            );
-                            setFetching(true);
-                            await request({
-                                data: {
-                                    dono_nome: data.dono_nome,
-                                    dono_cpf: cpf,
-                                },
-                            });
-                            setFetching(false);
-                            router.push('object');
-                        } catch (error) {
-                            setFetching(false);
-                            if (axios.isAxiosError(error)) {
-                                if (error.response?.data?.dono_nome) {
-                                    formMethods.setError('dono_nome', {
-                                        type: 'invalido',
-                                        message:
-                                            error.response?.data?.dono_nome[0],
-                                    });
-                                }
-                                if (error.response?.data?.dono_cpf) {
-                                    formMethods.setError('dono_cpf', {
-                                        type: 'invalido',
-                                        message:
-                                            error.response?.data?.dono_cpf[0],
-                                    });
-                                }
+        if (objectId && objectSelected) {
+            ApiServiceHateoas(
+                objectSelected.links,
+                'definir_dono_objeto',
+                async (request) => {
+                    try {
+                        const cpf = TextService.getNumbersFromText(
+                            data.dono_cpf
+                        );
+                        setFetching(true);
+                        await request({
+                            data: {
+                                dono_nome: data.dono_nome,
+                                dono_cpf: cpf,
+                            },
+                        });
+                        setFetching(false);
+                        router.push('object');
+                    } catch (error) {
+                        setFetching(false);
+                        if (axios.isAxiosError(error)) {
+                            if (error.response?.data?.dono_nome) {
+                                formMethods.setError('dono_nome', {
+                                    type: 'invalido',
+                                    message: error.response?.data?.dono_nome[0],
+                                });
+                            }
+                            if (error.response?.data?.dono_cpf) {
+                                formMethods.setError('dono_cpf', {
+                                    type: 'invalido',
+                                    message: error.response?.data?.dono_cpf[0],
+                                });
                             }
                         }
                     }
-                );
-            } else {
-                console.log('ID do objeto não encontrado');
-            }
+                }
+            );
         }
     }
 
